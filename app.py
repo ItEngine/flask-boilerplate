@@ -1,10 +1,13 @@
 from flask import Flask, render_template
-from flask_admin import Admin
-from flask_sqlalchemy import SQLAlchemy
-from flask_script import Manager
-from flask_migrate import Migrate, MigrateCommand
 
-from apps.main.controllers import main
+from flask_admin import Admin
+from flask_cors import CORS
+from flask_restful import Api
+from flask_sqlalchemy import SQLAlchemy
+
+from apps.main import controllers
+from apps.main import models
+
 
 # App flask
 app = Flask(__name__)
@@ -15,19 +18,27 @@ admin = Admin(app, name='Admin', template_mode='bootstrap3')
 
 # Config SQLAlchemy and migrations
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+db.init_app(app)
+db.app = app
 
-manager = Manager(app)
-manager.add_command('db', MigrateCommand)
+# Cors config
+CORS(
+    app,
+    resources={r"/*": {"origins": "*"}},
+    headers=['Content-Type', 'X-Requested-With', 'Authorization']
+)
+
+# Config Api REST
+api = Api(app)
+
+# Import module main
+app.register_blueprint(controllers.main, url_prefix='/')
 
 
-# Sample HTTP error handling
+# HTTP error handling
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html'), 404
-
-# Import module main
-app.register_blueprint(main, url_prefix='/')
 
 if __name__ == "__main__":
     app.run()
