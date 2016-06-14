@@ -8,7 +8,7 @@ DEBUG = True
 
 # Secret key for session management. You can generate random strings here:
 # http://clsc.net/tools-old/random-string-generator.php
-SECRET_KEY = 'my precious'
+SECRET_KEY = 'my-precious-secret-key'
 
 # Connect to the database
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASEDIR, 'database.db')
@@ -19,4 +19,4 @@ CSRF_ENABLED = True
 
 # Use a secure, unique and absolutely secret key for
 # signing the data.
-CSRF_SESSION_KEY = "secret"
+CSRF_SESSION_KEY = "secret-csrf-flask-app"
