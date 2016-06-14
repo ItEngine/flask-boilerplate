@@ -14,7 +14,7 @@ from apps.main import controllers
 # App flask
 app = Flask(__name__)
 # Config flask
-app.config.from_object('config')
+app.config.from_object('conf.config')
 
 # Config SQLAlchemy and migrations
 db = SQLAlchemy(app)

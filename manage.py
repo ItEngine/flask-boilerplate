@@ -5,7 +5,7 @@ from app import app, db
 from apps.main import models
 
 # Configutation app
-app.config.from_object('config')
+app.config.from_object('conf.config')
 
 # flask-migrate instance
 migrate = Migrate(app, db)
