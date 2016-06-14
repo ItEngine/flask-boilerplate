@@ -5,6 +5,7 @@ from flask import Flask, render_template
 
 from flask_admin import Admin
 from flask_cors import CORS
+import flask_login
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 
@@ -31,8 +32,30 @@ CORS(
 # Config Api REST
 api = Api(app)
 
-# Config admin
-admin = Admin(app, name='Admin', template_mode='bootstrap3')
+# Flask login instance
+login_manager = flask_login.LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(id):
+    from apps.main.models import User
+    return User.query.get(int(id))
+
+
+def load_admin():
+    """
+    Configuration admin
+    """
+    from apps.utils import MyAdminIndexView
+    admin = Admin(
+        app, name='Admin', index_view=MyAdminIndexView(),
+        template_mode='bootstrap3', base_template='admin_master.html',
+    )
+
+    return admin
+
+admin = load_admin()
 
 
 def import_modules():

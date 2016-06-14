@@ -1,7 +1,5 @@
-from flask_admin.contrib.sqla import ModelView
-
 from app import db, admin
 from apps.main import models
+from apps.utils import ModelViewSecurity
 
-
-admin.add_view(ModelView(models.User, db.session))
+admin.add_view(ModelViewSecurity(models.User, db.session))

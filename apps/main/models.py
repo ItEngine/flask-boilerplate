@@ -16,3 +16,14 @@ class User(db.Model):
     first_name = db.Column(db.String(120))
     last_name = db.Column(db.String(120))
     date_join = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    is_active = db.Column(db.Boolean, unique=False, default=True)
+
+    @property
+    def is_authenticated(self):
+        return True
+
+    def get_id(self):
+        try:
+            return self.id
+        except AttributeError:
+            raise NotImplementedError('No `id` attribute - override `get_id`')
