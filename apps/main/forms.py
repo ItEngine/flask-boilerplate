@@ -1,4 +1,5 @@
 from flask_wtf import Form
+from werkzeug.security import check_password_hash
 from wtforms import TextField, PasswordField
 from wtforms.validators import DataRequired, EqualTo, Length, ValidationError
 
@@ -13,15 +14,26 @@ class LoginForm(Form):
     username = TextField('Username', [DataRequired()])
     password = PasswordField('Password', [DataRequired()])
 
-    def validate_login(self, field):
+    def validate_login(self):
         user = self.get_user()
 
         if user is None:
-            raise ValidationError('Invalid user')
+            self.username.errors = ('Invalid username', )
+            return False
 
-        if user.password != self.password.data:
-            print("Entro")
-            raise ValidationError('Invalid password')
+        if not check_password_hash(user.password, self.password.data):
+            self.password.errors = ('Invalid password', )
+            return False
+
+        if not user.is_active:
+            self.username.errors = ('You are not an user active', )
+            return False
+
+        if not user.is_admin:
+            self.username.errors = ('You are not an administrator', )
+            return False
+
+        return True
 
     def get_user(self):
         return db.session.query(models.User).filter_by(

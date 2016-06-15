@@ -28,9 +28,12 @@ class MyAdminIndexView(AdminIndexView):
     def login_view(self):
         # handle user login
         form = LoginForm(request.form)
-        if helpers.validate_form_on_submit(form):
-            user = form.get_user()
-            login.login_user(user)
+
+        if request.method == 'POST':
+            if helpers.validate_form_on_submit(form) and form.validate_login():
+                user = form.get_user()
+                login.login_user(user)
+                return redirect(url_for('admin.index'))
 
         self._template_args['form'] = form
         return super(MyAdminIndexView, self).index()

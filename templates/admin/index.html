@@ -24,11 +24,9 @@
                         {{ f.label }}
                         {{ f(class='form-control')|safe }}
                         {% if f.errors %}
-                        <ul>
                             {% for e in f.errors %}
-                            <li style="color: red">{{ e }}</li>
+                            <p style="color: red">{{ e }}</p>
                             {% endfor %}
-                        </ul>
                         {% endif %}
                         </div>
                         {% endfor %}
