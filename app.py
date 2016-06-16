@@ -57,6 +57,7 @@ def import_modules():
     Import modules admin and controllers
     """
     from apps.main import admin
+    from apps.main import api
 
     # Import module main
     app.register_blueprint(controllers.main, url_prefix='/')
