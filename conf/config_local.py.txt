@@ -12,6 +12,8 @@ SECRET_KEY = 'my-precious-secret-key'
 
 # Connect to the database
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASEDIR, 'database.db')
+# POSTGRESQL = 'postgresql+psycopg2://user:password@localhost/database'
+# SQLALCHEMY_DATABASE_URI = POSTGRESQL
 
 # Use a secure, unique and absolutely secret key for
 # signing the data.
