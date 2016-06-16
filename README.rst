@@ -10,14 +10,16 @@ Getting started
 2. Execute pip install -r requirements.txt.
 3. Rename file conf/config_local.py.txt to conf/config_local.py and modify content file.
 4. Execute in folder static npm install.
-5. Execute python manage.py runserver and go to browser localhost:3000.
+5. Execute python manage.py runserver and go to browser localhost:5000.
+6. For create super user execute python manage.py createsuperuser.
+7. Execute admin localhost:5000/admin.
 
 Content
 -------
 
 1. Basic MVC structure.
 2. Model USER integrate.
-3. It contains the forms login, register and forgot password. Using flask-login
+3. It contains the forms login, register and forgot password. Using flask-login.
 4. Admin generator using flask-admin.
 5. API REST with flask-restful.
 6. Migrations with flask-migrate.
