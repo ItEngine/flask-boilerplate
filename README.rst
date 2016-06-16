@@ -27,3 +27,4 @@ Content
 8. Orm with SQLAlchemy.
 9. Bootstrap and Jquery.
 10. PostgreSql and Sqlite configuration.
+11. Email configuration with flask-email.

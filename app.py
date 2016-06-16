@@ -6,6 +6,7 @@ from flask import Flask, render_template
 from flask_admin import Admin
 from flask_cors import CORS
 import flask_login
+from flask_mail import Mail
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 
@@ -32,6 +33,10 @@ CORS(
 # Config Api REST
 api = Api(app)
 
+# Config email
+mail = Mail()
+mail.init_app(app)
+
 # Flask login instance
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
@@ -56,21 +61,14 @@ def import_modules():
     """
     Import modules admin and controllers
     """
+    from apps import urls
     from apps.main import admin
     from apps.main import api
-
-    # Import module main
-    app.register_blueprint(controllers.main, url_prefix='/')
+    from apps.main import urls
 
 
 # Import modules necessarys
 import_modules()
-
-
-# HTTP error handling
-@app.errorhandler(404)
-def not_found(error):
-    return render_template('404.html'), 404
 
 if __name__ == "__main__":
     app.run()
