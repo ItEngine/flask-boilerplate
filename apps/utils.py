@@ -1,5 +1,6 @@
-import flask_login as login
+import importlib
 
+import flask_login as login
 from flask import jsonify, redirect, render_template, request, url_for
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import expose, helpers
@@ -67,3 +68,13 @@ class MiximJson(object):
         ]
 
         return jsonify(json_list=serialized_labels)
+
+
+def include(url):
+    """
+    Include import dynamic
+    """
+    try:
+        importlib.import_module(url)
+    except ImportError:
+        pass

@@ -61,10 +61,7 @@ def import_modules():
     """
     Import modules admin and controllers
     """
-    from apps import urls
-    from apps.main import admin
-    from apps.main import api
-    from apps.main import urls
+    from apps import admin, api, urls
 
 
 # Import modules necessarys
