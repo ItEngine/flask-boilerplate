@@ -10,17 +10,17 @@ Getting started
 2. Execute pip install -r requirements.txt.
 3. Rename file conf/config_local.py.txt to conf/config_local.py and modify content file.
 4. Execute in folder static npm install.
-5. Execute python manage.py runserver and go to browser localhost:5000.
-6. Run migrations
-7. For create super user execute python manage.py createsuperuser.
+5. Run migrations.
+6. For create super user execute python manage.py createsuperuser.
+7. Execute python manage.py runserver and go to browser localhost:5000.
 8. Execute admin localhost:5000/admin.
 
 Migrations command
 ------------------
 
-python manage.py db init
-python manage.py db migrate
-python manage.py db upgrade
+1. python manage.py db init
+2. python manage.py db migrate
+3. python manage.py db upgrade
 
 Content
 -------
