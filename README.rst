@@ -11,8 +11,16 @@ Getting started
 3. Rename file conf/config_local.py.txt to conf/config_local.py and modify content file.
 4. Execute in folder static npm install.
 5. Execute python manage.py runserver and go to browser localhost:5000.
-6. For create super user execute python manage.py createsuperuser.
-7. Execute admin localhost:5000/admin.
+6. Run migrations
+7. For create super user execute python manage.py createsuperuser.
+8. Execute admin localhost:5000/admin.
+
+Migrations command
+------------------
+
+python manage.py db init
+python manage.py db migrate
+python manage.py db upgrade
 
 Content
 -------
