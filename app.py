@@ -25,8 +25,7 @@ db.app = app
 
 # Cors config
 CORS(
-    app,
-    resources={r"/*": {"origins": "*"}},
+    app, resources={r"/*": {"origins": "*"}},
     headers=['Content-Type', 'X-Requested-With', 'Authorization']
 )
 

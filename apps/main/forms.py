@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from werkzeug.security import check_password_hash
 from wtforms import TextField, PasswordField
 from wtforms.validators import DataRequired, EqualTo, Length, ValidationError
@@ -7,7 +7,7 @@ from app import db
 from apps.main import models
 
 
-class LoginForm(Form):
+class LoginForm(FlaskForm):
     """
     Login form
     """
@@ -16,7 +16,6 @@ class LoginForm(Form):
 
     def validate_login(self):
         user = self.get_user()
-
         if user is None:
             self.username.errors = ('Invalid username', )
             return False
@@ -40,7 +39,7 @@ class LoginForm(Form):
             username=self.username.data).first()
 
 
-class RegisterForm(Form):
+class RegisterForm(FlaskForm):
     """
     Register form
     """
@@ -62,7 +61,7 @@ class RegisterForm(Form):
     )
 
 
-class ForgotForm(Form):
+class ForgotForm(FlaskForm):
     """
     Forgot password form
     """
