@@ -20,11 +20,9 @@ manager = Manager(app)
 def _make_context():
     return dict(app=app, db=db, models=models)
 
-
-@manager.command
-def createsuperuser():
+def _validuser():
     """
-    Method for create super user
+    Valid user data
     """
     username = prompt('Username')
     if not username:
@@ -51,12 +49,27 @@ def createsuperuser():
     if not password == password_confirm:
         sys.exit('\nCould not create user: Passwords did not match')
 
+    return {
+        'username': username,
+        'firstname': firstname,
+        'lastname': lastname,
+        'email': email,
+        'password': password,
+    }
+
+
+@manager.command
+def createsuperuser():
+    """
+    Method for create super user
+    """
+    data = _validuser()
     user = models.User(
-        username=username,
-        email=email,
-        first_name=firstname,
-        last_name=lastname,
-        password=password,
+        username=data['username'],
+        email=data['email'],
+        first_name=data['firstname'],
+        last_name=data['lastname'],
+        password=data['password'],
         is_active=True,
         is_admin=True
     )
@@ -65,6 +78,29 @@ def createsuperuser():
     db.session.commit()
 
     print("SuperUser created!")
+
+
+@manager.command
+def createuser():
+    """
+    Method for create user
+    """
+    data = _validuser()
+    user = models.User(
+        username=data['username'],
+        email=data['email'],
+        first_name=data['firstname'],
+        last_name=data['lastname'],
+        password=data['password'],
+        is_active=True,
+        is_admin=False
+    )
+
+    db.session.add(user)
+    db.session.commit()
+
+    print("User created!")
+
 
 # Managers commands
 manager.add_command('db', MigrateCommand)
