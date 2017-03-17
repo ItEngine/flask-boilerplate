@@ -1,13 +1,13 @@
 from wtforms import PasswordField
 
 from app import db, admin
-from apps.main import models
-from apps.utils import ModelViewSecurity
+from apps.auth import models
+from apps.auth.utils import ModelViewSecurity
 
 
 class UserAdmin(ModelViewSecurity):
     form_columns = (
-        'username', 'password', 'email', 
+        'username', 'password', 'email',
         'first_name', 'last_name', 'is_active',
         'is_admin',
     )
