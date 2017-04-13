@@ -43,7 +43,13 @@ class RegisterForm(FlaskForm):
     """
     Register form
     """
-    name = TextField(
+    first_name = TextField(
+        'Name', validators=[DataRequired(), Length(min=6, max=25)]
+    )
+    last_name = TextField(
+        'Surname', validators=[DataRequired(), Length(min=6, max=25)]
+    )
+    username = TextField(
         'Username', validators=[DataRequired(), Length(min=6, max=25)]
     )
     email = TextField(
@@ -59,6 +65,15 @@ class RegisterForm(FlaskForm):
             EqualTo('password', message='Passwords must match')
         ]
     )
+
+    def validate_username(form, field):
+        username = field.data
+        user = db.session.query(models.User).filter_by(
+            username=username
+        ).first()
+
+        if user is not None:
+            raise ValidationError("The user is already registered")
 
 
 class ForgotForm(FlaskForm):
