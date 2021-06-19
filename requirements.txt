@@ -11,7 +11,7 @@ Flask-Migrate==2.0.3
 # For manage shell
 Flask-Script==2.0.5
 # Cors api
-Flask-Cors==3.0.2
+Flask-Cors==3.0.9
 # For create api's
 Flask-RESTful==0.3.5
 # For send mails
