@@ -1,5 +1,5 @@
 # Framework
-Flask==0.12
+Flask==1.0
 # Admin style Django
 Flask-Admin==1.5.0
 # Orm database
