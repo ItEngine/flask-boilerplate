@@ -1,5 +1,3 @@
-import importlib
-
 from flask import jsonify
 from sqlalchemy.orm import class_mapper
 
@@ -8,6 +6,7 @@ class MiximJson(object):
     """
     Mixin for json objects
     """
+
     def serialize(self, model):
         """
         Transforms a model into a dictionary which can be dumped to JSON.
@@ -25,13 +24,3 @@ class MiximJson(object):
         ]
 
         return jsonify(json_list=serialized_labels)
-
-
-def include(url):
-    """
-    Include import dynamic
-    """
-    try:
-        importlib.import_module(url)
-    except ImportError:
-        pass

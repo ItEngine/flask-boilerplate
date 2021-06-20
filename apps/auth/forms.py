@@ -1,10 +1,13 @@
+from flask import current_app
+
 from flask_wtf import FlaskForm
 from werkzeug.security import check_password_hash
 from wtforms import TextField, PasswordField
 from wtforms.validators import DataRequired, EqualTo, Length, ValidationError
 
-from app import db
 from apps.auth import models
+
+db = current_app.db
 
 
 class LoginForm(FlaskForm):

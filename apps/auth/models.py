@@ -1,10 +1,12 @@
 import datetime
 
-from flask import Blueprint
+from flask import current_app
+
 from sqlalchemy import event
 from werkzeug.security import generate_password_hash
 
-from app import db, login_manager
+db = current_app.db
+login_manager = current_app.login_manager
 
 
 class User(db.Model):
@@ -47,6 +49,7 @@ class User(db.Model):
 def hash_password(target, value, oldvalue, initiator):
     if value is not None:
         return generate_password_hash(value)
+
 
 # Setup listener on User attribute password
 event.listen(User.password, 'set', hash_password, retval=True)

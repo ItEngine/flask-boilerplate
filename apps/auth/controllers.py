@@ -1,4 +1,5 @@
 from flask import redirect, request, url_for
+
 from flask_admin import expose, helpers
 from flask_admin.base import AdminIndexView
 import flask_login as login
@@ -9,8 +10,9 @@ from apps.auth.forms import LoginForm
 class MyAdminIndexView(AdminIndexView):
     """
     Create customized index view class that
-    handles login & registration
+    handles login & registration forms
     """
+
     @expose('/')
     def index(self):
         if not login.current_user.is_authenticated:

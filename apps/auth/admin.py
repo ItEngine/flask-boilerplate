@@ -1,6 +1,5 @@
 from wtforms import PasswordField
 
-from app import db, admin
 from apps.auth import models
 from apps.auth.utils import ModelViewSecurity
 
@@ -23,4 +22,5 @@ class UserAdmin(ModelViewSecurity):
         return form_class
 
 
-admin.add_view(UserAdmin(models.User, db.session))
+def add_to_admin(app, admin):
+    admin.add_view(UserAdmin(models.User, app.db.session))
